@@ -9,6 +9,13 @@ RuboCop::RakeTask.new
 
 RSpec::Core::RakeTask.new(:spec)
 
+namespace :script_testable do
+  desc "Run the Testable info script"
+  task :info do
+    system("ruby ./examples/testable-info.rb")
+  end
+end
+
 namespace :spec do
   desc 'Clean all generated reports'
   task :clean do
