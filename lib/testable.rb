@@ -26,7 +26,7 @@ module Testable
     end
 
     alias start_browser set_browser
-    
+
     def quit_browser
       @browser.quit
     end

@@ -24,6 +24,12 @@ RSpec.describe Testable do
     it "returns Watir API information" do
       expect(Testable).to respond_to :watir_api
       expect(Testable.watir_api).to be_an_instance_of(Array)
+
+      # I'm not entirely sure why I can't do this. I think
+      # it's because an actual driver instance has not been
+      # set up yet so the full range of Watir's methods have
+      # not yet become available.
+      # expect(Cogent.watir_api).to include("browser")
     end
 
     it "returns Selenium API information" do
@@ -32,6 +38,12 @@ RSpec.describe Testable do
       # NOTE: This is not working due to the call to `driver`. I have
       # no idea how to mock that out in a way that resolves.
       # expect(Testable.selenium_api).to be_an_instance_of(Array)
+    end
+  end
+
+  context "a cogent driver is requested" do
+    it "a default watir browser is provided" do
+      allow(Watir::Browser).to receive(:new).and_return(Testable.browser)
     end
   end
 end
