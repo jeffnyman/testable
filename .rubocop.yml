@@ -1,0 +1,6 @@
+inherit_mode:
+  merge:
+    - Exclude
+
+inherit_from:
+  - .hound.yml
