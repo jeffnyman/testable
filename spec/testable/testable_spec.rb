@@ -16,6 +16,8 @@ RSpec.describe Testable do
 
   it "returns its own API information" do
     expect(Testable.api.to_s).to include("browser")
+    expect(Testable.api.to_s).to include("start_browser")
+    expect(Testable.api.to_s).to include("quit_browser")
   end
 
   context "third-party APIs" do

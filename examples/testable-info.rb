@@ -3,6 +3,9 @@ $LOAD_PATH << "./lib"
 
 require "testable"
 
+require "rspec"
+include RSpec::Matchers
+
 puts Testable::VERSION
 
 puts "================================="
@@ -19,3 +22,10 @@ puts "================================="
 puts "Testable's API"
 puts "================================="
 puts Testable.api
+
+Testable.start_browser :firefox, headless: true
+
+expect(Testable.browser).to be_an_instance_of(Watir::Browser)
+expect(Testable.browser.driver).to be_an_instance_of(Selenium::WebDriver::Firefox::Marionette::Driver)
+
+Testable.quit_browser
