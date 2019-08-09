@@ -7,6 +7,8 @@ module Testable
 
       def url_is(url = nil)
         url_is_empty if url.nil? && url_attribute.nil?
+        url_is_empty if url.nil? || url.empty?
+        @url = url
       end
 
       def url_attribute

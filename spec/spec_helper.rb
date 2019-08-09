@@ -25,6 +25,22 @@ RSpec.configure do |config|
     let(:watir_browser) { mock_driver }
     let(:definition)    { ValidPage }
     let(:empty_page)    { EmptyPage.new(watir_browser) }
+    let(:page)          { ValidPage.new(watir_browser) }
+  end
+end
+
+RSpec.configure do |config|
+  original_stderr = $stderr
+  original_stdout = $stdout
+
+  config.before(:all) do
+    $stderr = File.new(File.join(File.dirname(__FILE__), "reports/testable-output.txt"), "a")
+    $stdout = File.new(File.join(File.dirname(__FILE__), "reports/testable-output.txt"), "a")
+  end
+
+  config.after(:all) do
+    $stderr = original_stderr
+    $stdout = original_stdout
   end
 end
 

@@ -17,6 +17,12 @@ end
 Testable.start_browser :firefox
 
 page = Home.new
-expect(page).to be_an_instance_of(Home)
+
+# You can specify a URL to visit or you can rely on the provided
+# url_is attribute on the page definition. So you could do this:
+# page.visit("https://veilus.herokuapp.com/")
+page.visit
+
+expect(page.url).to eq(page.url_attribute)
 
 Testable.quit_browser
