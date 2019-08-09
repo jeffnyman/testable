@@ -23,10 +23,11 @@ module Testable
     caller.__send__ :include, Testable::DataSetter
   end
 
-  def initialize(browser = nil)
+  def initialize(browser = nil, &block)
     @browser = Testable.browser unless Testable.browser.nil?
     @browser = browser if Testable.browser.nil?
     begin_with if respond_to?(:begin_with)
+    instance_eval(&block) if block
   end
 
   # This accessor is needed so that internal API calls, like `markup` or
