@@ -4,6 +4,14 @@ module Testable
   module Pages
     include Situation
 
+    # This provides a list of the methods that are defined on the page
+    # definition. This is helpful is you need to query the page to see
+    # if an element has been provided since all elements automatically
+    # become methods on a definition instance.
+    def definition_api
+      public_methods(false) - Object.public_methods
+    end
+
     # The `visit` method provides navigation to a specific page by passing
     # in the URL. If no URL is passed in, this method will attempt to use
     # the `url_is` attribute from the interface it is being called on.

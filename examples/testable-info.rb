@@ -42,13 +42,24 @@ expect(page).to be_a_kind_of(Testable)
 expect(page).to be_an_instance_of(Home)
 
 puts "================================="
-puts "Cogent's Watir API"
+puts "Testable's Watir API"
 puts "================================="
 puts Testable.watir_api
 
 puts "================================="
-puts "Cogent's Selenium API"
+puts "Testable's Selenium API"
 puts "================================="
 puts Testable.selenium_api
+
+puts "================================="
+puts "Testable's Definition API"
+puts "================================="
+puts page.definition_api
+
+puts "================================="
+puts "Testable's Elements"
+puts "================================="
+puts Testable.elements?
+puts Testable.recognizes?("div")
 
 Testable.quit_browser

@@ -3,6 +3,11 @@ RSpec.describe Testable::Pages do
   include_context :element
 
   context "an instance of a page interface definition" do
+    it "provides a definition API" do
+      expect(page).to respond_to :definition_api
+      expect(page.definition_api).to be_an_instance_of(Array)
+    end
+
     it "provides a url_attribute for a url_is value" do
       expect(page).to respond_to :url_attribute
       expect(page.url_attribute).to eq("http://localhost:9292")
