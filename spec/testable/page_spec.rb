@@ -154,5 +154,30 @@ RSpec.describe Testable::Pages do
       expect(watir_browser).to receive(:window).and_return(watir_browser)
       page.move_to(0, 0)
     end
+
+    it "refreshes the page" do
+      expect(watir_browser).to receive(:refresh).twice.and_return(watir_browser)
+      page.refresh_page
+      page.refresh
+    end
+
+    it "gets a cookie value" do
+      cookie = [{:name => 'test', :value => 'cookie', :path => '/'}]
+      expect(watir_browser).to receive(:cookies).and_return(cookie)
+      expect(page.get_cookie('test')).to eq('cookie')
+    end
+
+    it "returns nothing if a cookie value is not found" do
+      cookie = [{:name => 'test', :value =>'cookie', :path => '/'}]
+      expect(watir_browser).to receive(:cookies).and_return(nil)
+      expect(page.get_cookie('testing')).to be_nil
+    end
+
+    it "clears all cookies from the browser" do
+      expect(watir_browser).to receive(:cookies).twice.and_return(watir_browser)
+      expect(watir_browser).to receive(:clear).twice
+      page.remove_cookies
+      page.clear_cookies
+    end
   end
 end
