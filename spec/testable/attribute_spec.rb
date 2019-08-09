@@ -22,5 +22,28 @@ RSpec.describe Testable::Pages::Attribute do
         end
       }.to raise_error Testable::Errors::NoUrlForDefinition
     end
+
+    it "allows a title_attribute attribute" do
+      expect(definition).to respond_to :title_attribute
+    end
+
+    it "provides no default title" do
+      expect(empty_page.title_attribute).to be_nil
+    end
+
+    it "does not verify a title if the title_is attribute has not been set" do
+      expect {
+        empty_page.has_correct_title?
+      }.to raise_error Testable::Errors::NoTitleForDefinition
+    end
+
+    it "does not allow an empty title_is attribute" do
+      expect {
+        class PageWithEmptyTitleIs
+          include Testable
+          title_is
+        end
+      }.to raise_error Testable::Errors::NoTitleForDefinition
+    end
   end
 end

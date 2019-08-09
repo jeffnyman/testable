@@ -31,5 +31,33 @@ RSpec.describe Testable::Pages do
       expect(page.page_url).to eq("http://localhost:9292")
       expect(page.url).to eq("http://localhost:9292")
     end
+
+    it "provides a title_attribute for a title_is value" do
+      expect(page).to respond_to :title_attribute
+      expect(page.title_attribute).to eq("Veilus")
+    end
+
+    it "allows access to the title of a page" do
+      expect(watir_browser).to receive(:title).exactly(3).times.and_return("Veilus")
+      expect(page).to respond_to :title
+      expect(page.page_title).to eq("Veilus")
+      expect(page.title).to eq("Veilus")
+      expect(page.title).to include("Veil")
+    end
+
+    it "verifies a title if the title_is assertion has been set" do
+      expect(watir_browser).to receive(:title).twice.and_return "Veilus"
+      expect { page.has_correct_title? }.not_to raise_error
+      expect(page.has_correct_title?).to be_truthy
+    end
+
+    it "does not verify a title if the title does not match the title_is assertion" do
+      expect(watir_browser).to receive(:title).and_return("Page Title")
+      expect(page.has_correct_title?).to be_falsey
+    end
+
+    it "provides an exception when no title is provided and and a title check is attempted" do
+      expect { empty_page.has_correct_title? }.to raise_error Testable::Errors::NoTitleForDefinition
+    end
   end
 end

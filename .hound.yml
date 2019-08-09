@@ -67,3 +67,10 @@ Metrics/ParameterLists:
 # Remove execute permissions check.
 Lint/ScriptPermission:
   Enabled: false
+
+# Testable Exceptions
+
+# Allow methods with has_ for predicates.
+Naming/PredicateName:
+  NameWhitelist:
+    - has_correct_title?

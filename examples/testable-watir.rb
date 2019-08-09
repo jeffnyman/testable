@@ -12,6 +12,7 @@ class Home
   include Testable
 
   url_is "https://veilus.herokuapp.com/"
+  title_is "Veilus"
 end
 
 Testable.start_browser :firefox
@@ -24,5 +25,9 @@ page = Home.new
 page.visit
 
 expect(page.url).to eq(page.url_attribute)
+expect(page.title).to eq(page.title_attribute)
+
+expect(page.has_correct_title?).to be_truthy
+expect(page).to have_correct_title
 
 Testable.quit_browser
