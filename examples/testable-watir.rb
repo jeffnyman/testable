@@ -16,17 +16,18 @@ class Home
   title_is "Veilus"
 
   # Elements can be defined with HTML-style names as found in Watir.
-  p          :login_form, id: "open", visible: true
-  text_field :username,   id: "username"
+  p          :login_form, id:    "open", visible: true
+  text_field :username,   id:    "username"
   text_field :password
-  button     :login,      id: "login-button"
-  div        :message,    class: 'notice'
+  button     :login,      id:    "login-button"
+  div        :message,    class: "notice"
 
   # Elements can be defined with a generic name.
-  # element :login_form, id: "open", visible: true
-  # element :username,   id: "username"
+  # element :login_form, id:    "open", visible: true
+  # element :username,   id:    "username"
   # element :password
-  # element :login,      id: "login-button"
+  # element :login,      id:    "login-button"
+  # element :message,    class: "notice"
 end
 
 Testable.start_browser :firefox
@@ -62,5 +63,12 @@ page.username.set "admin"
 page.password(id: 'password').set "admin"
 page.login.click
 expect(page.message.text).to eq('You are now logged in as admin.')
+
+page.run_script("alert('Testing');")
+
+expect(page.browser.alert.exists?).to be_truthy
+expect(page.browser.alert.text).to eq("Testing")
+page.browser.alert.ok
+expect(page.browser.alert.exists?).to be_falsy
 
 Testable.quit_browser

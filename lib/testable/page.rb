@@ -109,5 +109,29 @@ module Testable
     end
 
     alias page_text text
+
+    # This method provides a call to the synchronous `execute_script`
+    # action on the browser, passing in JavaScript that you want to have
+    # executed against the current page. For example:
+    #
+    #    result = page.run_script("alert('Cogent ran a script.')")
+    #
+    # You can also run full JavaScript snippets.
+    #
+    #    script = <<-JS
+    #      return arguments[0].innerHTML
+    #    JS
+    #
+    #    page.run_script(script, page.account)
+    #
+    # Here you pass two arguments to `run_script`. One is the script itself
+    # and the other are some arguments that you want to pass as part of
+    # of the execution. In this case, an element definition (`account`) is
+    # being passed in.
+    def run_script(script, *args)
+      browser.execute_script(script, *args)
+    end
+
+    alias execute_script run_script
   end
 end

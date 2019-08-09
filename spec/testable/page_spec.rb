@@ -1,5 +1,6 @@
 RSpec.describe Testable::Pages do
   include_context :interface
+  include_context :element
 
   context "an instance of a page interface definition" do
     it "provides a url_attribute for a url_is value" do
@@ -107,6 +108,17 @@ RSpec.describe Testable::Pages do
       expect(page.page_text).to eq("some page text")
       expect(page.text).to eq("some page text")
       expect(page.text).to include("page text")
+    end
+
+    it "runs a script against the browser" do
+      expect(watir_browser).to receive(:execute_script).twice.and_return("input")
+      expect(page.run_script("return document.activeElement")).to eq("input")
+      expect(page.execute_script("return document.activeElement")).to eq("input")
+    end
+
+    it "runs a script, with arguments, against the browser" do
+      expect(watir_browser).to receive(:execute_script).with("return arguments[0].innerHTML", watir_element).and_return("testing")
+      expect(page.execute_script("return arguments[0].innerHTML", watir_element)).to eq("testing")
     end
   end
 end
