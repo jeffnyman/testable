@@ -179,5 +179,12 @@ RSpec.describe Testable::Pages do
       page.remove_cookies
       page.clear_cookies
     end
+
+    it "can grab a screenshot of the current page" do
+      expect(watir_browser).to receive(:save).twice.with("testing.png")
+      expect(watir_browser).to receive(:screenshot).twice.and_return(watir_browser)
+      page.screenshot("testing.png")
+      page.save_screenshot("testing.png")
+    end
   end
 end

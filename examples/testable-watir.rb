@@ -98,4 +98,6 @@ page.move_to(page.screen_width / 2, page.screen_height / 2)
 # A sleep to show that the move occurs.
 sleep 2
 
+page.screenshot("testing.png")
+
 Testable.quit_browser

@@ -199,5 +199,16 @@ module Testable
     end
 
     alias remove_cookies clear_cookies
+
+    # A call to `screenshot` saves a screenshot of the current browser
+    # page. Note that this will grab the entire browser page, even portions
+    # of it that are off panel and need to be scrolled to. You can pass in
+    # the path and filename of the image that you want the screenshot
+    # saved to.
+    def screenshot(file)
+      browser.screenshot.save(file)
+    end
+
+    alias save_screenshot screenshot
   end
 end
