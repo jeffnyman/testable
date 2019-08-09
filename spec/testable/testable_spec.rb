@@ -29,7 +29,7 @@ RSpec.describe Testable do
       # it's because an actual driver instance has not been
       # set up yet so the full range of Watir's methods have
       # not yet become available.
-      # expect(Cogent.watir_api).to include("browser")
+      # expect(Testable.watir_api).to include("browser")
     end
 
     it "returns Selenium API information" do
@@ -41,7 +41,7 @@ RSpec.describe Testable do
     end
   end
 
-  context "a cogent driver is requested" do
+  context "a testable driver is requested" do
     it "a default watir browser is provided" do
       allow(Watir::Browser).to receive(:new).and_return(Testable.browser)
     end

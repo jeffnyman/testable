@@ -1,5 +1,7 @@
 require "testable/version"
 require "testable/page"
+require "testable/element"
+require "testable/locator"
 require "testable/attribute"
 
 require "watir"
@@ -9,13 +11,22 @@ require "webdrivers"
 module Testable
   def self.included(caller)
     caller.extend Testable::Pages::Attribute
+    caller.extend Testable::Pages::Element
     caller.__send__ :include, Testable::Pages
+    caller.__send__ :include, Testable::Element::Locator
   end
 
   def initialize(browser = nil)
     @browser = Testable.browser unless Testable.browser.nil?
     @browser = browser if Testable.browser.nil?
   end
+
+  # This accessor is needed so that internal API calls, like `markup` or
+  # `text`, have access to the browser instance. This is also necessary
+  # in order for element handling to be called appropriately on the a
+  # valid browser instance. This is an instance-level access to whatever
+  # browser Testable is using.
+  attr_accessor :browser
 
   class << self
     def watir_api
@@ -27,7 +38,7 @@ module Testable
       browser.driver.methods - Object.public_methods
     end
 
-    # This accessor is needed so that Cogent itself can provide a browser
+    # This accessor is needed so that Testable itself can provide a browser
     # reference to indicate connection to WebDriver. This is a class-level
     # access to the browser.
     attr_accessor :browser
