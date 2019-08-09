@@ -26,13 +26,13 @@ RSpec.configure do |config|
     let(:definition)    { ValidPage }
     let(:empty_page)    { EmptyPage.new(watir_browser) }
     let(:page)          { ValidPage.new(watir_browser) }
-
-    RSpec.shared_context :element do
-      let(:watir_element) { double('element') }
-    end
-
-    config.alias_it_should_behave_like_to :provides_an, "when providing an"
   end
+
+  RSpec.shared_context :element do
+    let(:watir_element) { double('element') }
+  end
+
+  config.alias_it_should_behave_like_to :provides_an, "when providing an"
 end
 
 RSpec.configure do |config|

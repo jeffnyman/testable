@@ -35,10 +35,33 @@ class Home
   end
 end
 
+class Navigation
+  include Testable
+
+  p     :page_list,     id: "navlist"
+  link  :planets,       id: "planets"
+
+  image :planet_logo,   id: "planet-logo"
+end
+
 Testable.start_browser :firefox
 
 page = Home.new
 
 page.visit
+
+page.login_form.click
+page.username.set "admin"
+page.password(id: 'password').set "admin"
+page.login.click
+expect(page.message.text).to eq('You are now logged in as admin.')
+
+page = Navigation.new
+
+page.page_list.click
+# page.page_list.wait_until(&:dom_updated?).click
+
+page.planets.click
+expect(page.planet_logo.exists?).to be true
 
 Testable.quit_browser

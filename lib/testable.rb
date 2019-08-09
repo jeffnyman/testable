@@ -4,6 +4,8 @@ require "testable/element"
 require "testable/locator"
 require "testable/attribute"
 
+require "testable/extensions/dom_observer"
+
 require "watir"
 require "capybara"
 require "webdrivers"

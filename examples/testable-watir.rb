@@ -30,6 +30,21 @@ class Home
   # element :message,    class: "notice"
 end
 
+# You can pass argument options to the driver:
+
+# args = ['user-data-dir=~/Library/Application\ Support/Google/Chrome']
+# Testable.start_browser :chrome, options: {args: args}
+
+# You can pass switches to the driver:
+
+# Testable.set_browser :chrome, switches: %w[--ignore-certificate-errors
+#                                            --disable-popup-blocking
+#                                            --disable-translate
+#                                            --disable-notifications
+#                                            --disable-gpu
+#                                            --disable-login-screen-apps
+#                                           ]
+
 Testable.start_browser :firefox
 
 page = Home.new
