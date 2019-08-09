@@ -16,6 +16,13 @@ namespace :script_testable do
   end
 end
 
+namespace :script_watir do
+  desc "Run the Testable Watir script"
+  task :watir do
+    system("ruby ./examples/testable-watir.rb")
+  end
+end
+
 namespace :spec do
   desc 'Clean all generated reports'
   task :clean do

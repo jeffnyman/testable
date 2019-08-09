@@ -16,6 +16,16 @@ SimpleCov.start do
   maximum_coverage_drop 5
 end
 
+Dir['spec/fixtures/**/*.rb'].each do |file|
+  require file.sub(/spec\//, '')
+end
+
+RSpec.configure do |config|
+  RSpec.shared_context :interface do
+    let(:definition)    { ValidPage }
+  end
+end
+
 RSpec.configure do |config|
   # Enable flags like --only-failures and --next-failure
   config.example_status_persistence_file_path = "spec/.rspec_status"

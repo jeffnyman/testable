@@ -1,10 +1,17 @@
 require "testable/version"
+require "testable/page"
+require "testable/attribute"
 
 require "watir"
 require "capybara"
 require "webdrivers"
 
 module Testable
+  def self.included(caller)
+    caller.extend Testable::Pages::Attribute
+    caller.__send__ :include, Testable::Pages
+  end
+
   class << self
     def watir_api
       browser.methods - Object.public_methods -
