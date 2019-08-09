@@ -22,7 +22,9 @@ end
 
 RSpec.configure do |config|
   RSpec.shared_context :interface do
+    let(:watir_browser) { mock_driver }
     let(:definition)    { ValidPage }
+    let(:empty_page)    { EmptyPage.new(watir_browser) }
   end
 end
 

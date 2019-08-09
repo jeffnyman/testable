@@ -4,7 +4,9 @@ $LOAD_PATH << "./lib"
 require "testable"
 
 require "rspec"
+# rubocop:disable Style/MixinUsage
 include RSpec::Matchers
+# rubocop:enable Style/MixinUsage
 
 puts Testable::VERSION
 
@@ -32,7 +34,9 @@ Testable.start_browser :firefox, headless: true
 page = Home.new
 
 expect(Testable.browser).to be_an_instance_of(Watir::Browser)
-expect(Testable.browser.driver).to be_an_instance_of(Selenium::WebDriver::Firefox::Marionette::Driver)
+expect(Testable.browser.driver).to be_an_instance_of(
+  Selenium::WebDriver::Firefox::Marionette::Driver
+)
 
 expect(page).to be_a_kind_of(Testable)
 expect(page).to be_an_instance_of(Home)

@@ -12,6 +12,11 @@ module Testable
     caller.__send__ :include, Testable::Pages
   end
 
+  def initialize(browser = nil)
+    @browser = Testable.browser unless Testable.browser.nil?
+    @browser = browser if Testable.browser.nil?
+  end
+
   class << self
     def watir_api
       browser.methods - Object.public_methods -
