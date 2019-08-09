@@ -1,5 +1,6 @@
 require "testable/version"
 require "testable/page"
+require "testable/ready"
 require "testable/context"
 require "testable/element"
 require "testable/locator"
@@ -16,6 +17,7 @@ module Testable
   def self.included(caller)
     caller.extend Testable::Pages::Attribute
     caller.extend Testable::Pages::Element
+    caller.__send__ :include, Testable::Ready
     caller.__send__ :include, Testable::Pages
     caller.__send__ :include, Testable::Element::Locator
     caller.__send__ :include, Testable::DataSetter

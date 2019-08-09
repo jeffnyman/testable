@@ -49,6 +49,15 @@ module Testable
       raise Testable::Errors::NoTitleForDefinition
     end
 
+    def not_ready_validation(message)
+      puts "PROBLEM: A ready validation error was encountered.\n" \
+      "A ready validation failed to validate. The ready check was " \
+      "on the '#{self.class}' definition. " \
+      "The reason provided was:\n" \
+      "#{message}.\n\n"
+      raise Testable::Errors::PageNotValidatedError, message
+    end
+
     def retrieve_method(caller)
       caller[0][/`.*'/][1..-2]
     end

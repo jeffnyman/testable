@@ -4,6 +4,7 @@ module Testable
     NoUrlMatchForDefinition = Class.new(StandardError)
     NoUrlMatchPossible = Class.new(StandardError)
     NoTitleForDefinition = Class.new(StandardError)
+    PageNotValidatedError = Class.new(StandardError)
 
     class PageURLFromFactoryNotVerified < StandardError
       def message
