@@ -21,6 +21,11 @@ namespace :script_watir do
   task :watir do
     system("ruby ./examples/testable-watir.rb")
   end
+
+  desc "Run the Testable Watir example test"
+  task :test do
+    system("ruby ./examples/testable-watir-test.rb")
+  end
 end
 
 namespace :spec do

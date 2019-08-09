@@ -19,6 +19,7 @@ module Testable
   def initialize(browser = nil)
     @browser = Testable.browser unless Testable.browser.nil?
     @browser = browser if Testable.browser.nil?
+    begin_with if respond_to?(:begin_with)
   end
 
   # This accessor is needed so that internal API calls, like `markup` or
