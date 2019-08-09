@@ -86,5 +86,13 @@ RSpec.describe Testable::Pages do
     it "provides an exception when no title is provided and and a title check is attempted" do
       expect { empty_page.has_correct_title? }.to raise_error Testable::Errors::NoTitleForDefinition
     end
+
+    it "verifies a secure page" do
+      expect(watir_browser).to receive(:url).and_return("https://localhost:9292")
+      expect(page.secure?).to be_truthy
+
+      expect(watir_browser).to receive(:url).and_return("htts://localhost:9292")
+      expect(page.secure?).to be_falsy
+    end
   end
 end

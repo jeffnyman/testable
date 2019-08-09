@@ -83,5 +83,12 @@ module Testable
       no_title_is_provided if title_attribute.nil?
       !title.match(title_attribute).nil?
     end
+
+    # A call to `secure?` returns true if the page is secure and false
+    # otherwise. This is a simple check that looks for whether or not the
+    # current URL begins with 'https'.
+    def secure?
+      !url.match(/^https/).nil?
+    end
   end
 end

@@ -38,4 +38,7 @@ expect(page).to be_displayed
 expect(page.has_correct_title?).to be_truthy
 expect(page).to have_correct_title
 
+expect(page.secure?).to be_truthy
+expect(page).to be_secure
+
 Testable.quit_browser
