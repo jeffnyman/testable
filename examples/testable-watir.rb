@@ -12,6 +12,7 @@ class Home
   include Testable
 
   url_is "https://veilus.herokuapp.com/"
+  url_matches(/heroku/)
   title_is "Veilus"
 end
 
@@ -25,7 +26,14 @@ page = Home.new
 page.visit
 
 expect(page.url).to eq(page.url_attribute)
+expect(page.url).to match(page.url_match_attribute)
 expect(page.title).to eq(page.title_attribute)
+
+expect(page.has_correct_url?).to be_truthy
+expect(page).to have_correct_url
+
+expect(page.displayed?).to be_truthy
+expect(page).to be_displayed
 
 expect(page.has_correct_title?).to be_truthy
 expect(page).to have_correct_title

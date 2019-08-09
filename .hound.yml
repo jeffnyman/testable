@@ -74,3 +74,4 @@ Lint/ScriptPermission:
 Naming/PredicateName:
   NameWhitelist:
     - has_correct_title?
+    - has_correct_url?

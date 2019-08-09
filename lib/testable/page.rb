@@ -35,6 +35,30 @@ module Testable
     alias page_url    url
     alias current_url url
 
+    # A call to `url_match_attribute` returns what the value of the
+    # `url_matches` attribute is for the given interface. It's important
+    # to note that the URL matching mechanism is effectively a regular
+    # expression check.
+    def url_match_attribute
+      value = self.class.url_match_attribute
+      return if value.nil?
+
+      value = Regexp.new(value) unless value.is_a?(Regexp)
+      value
+    end
+
+    # A call to `has_correct_url?`returns true or false if the actual URL
+    # found in the browser matches the `url_matches` assertion. This is
+    # important to note. It's not using the `url_is` attribute nor the URL
+    # displayed in the browser. It's using the `url_matches` attribute.
+    def has_correct_url?
+      no_url_match_is_possible if url_attribute.nil? && url_match_attribute.nil?
+      !(url =~ url_match_attribute).nil?
+    end
+
+    alias displayed? has_correct_url?
+    alias loaded?    has_correct_url?
+
     # A call to `title_attribute` returns what the value of the `title_is`
     # attribute is for the given definition. It's important to note that
     # this is not grabbing the title that is displayed in the browser;

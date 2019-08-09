@@ -23,6 +23,29 @@ RSpec.describe Testable::Pages::Attribute do
       }.to raise_error Testable::Errors::NoUrlForDefinition
     end
 
+    it "allows a url_match_attribute attribute" do
+      expect(definition).to respond_to :url_match_attribute
+    end
+
+    it "provides no default url matcher" do
+      expect(empty_page.url_match_attribute).to be_nil
+    end
+
+    it "does not allow an empty url_matches attribute" do
+      expect {
+        class PageWithEmptyUrlMatches
+          include Testable
+          url_matches
+        end
+      }.to raise_error Testable::Errors::NoUrlMatchForDefinition
+    end
+
+    it "does not verify a url if the url_matches attribute has not been set" do
+      expect {
+        empty_page.has_correct_url?
+      }.to raise_error Testable::Errors::NoUrlMatchPossible
+    end
+
     it "allows a title_attribute attribute" do
       expect(definition).to respond_to :title_attribute
     end

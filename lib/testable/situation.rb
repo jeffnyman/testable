@@ -20,6 +20,21 @@ module Testable
       raise Testable::Errors::NoUrlForDefinition
     end
 
+    def no_url_match_is_possible
+      puts "PROBLEM: No url_is or url_matches attribute.\n" \
+      "You called a '#{retrieve_method(caller)}' action but the " \
+      "definition '#{self.class}' has no url_is attribute nor a " \
+      "url_matches attribute.\n\n"
+      raise Testable::Errors::NoUrlMatchPossible
+    end
+
+    def url_match_is_empty
+      puts "PROBLEM: url_matches attribute empty.\n" \
+      "The url_matches attribute is empty on the definition " \
+      "'#{retrieve_class(caller)}'.\n\n"
+      raise Testable::Errors::NoUrlMatchForDefinition
+    end
+
     def title_is_empty
       puts "PROBLEM: title_is attribute empty.\n" \
       "The title_is attribute is empty on the definition " \

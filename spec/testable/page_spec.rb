@@ -2,6 +2,11 @@ RSpec.describe Testable::Pages do
   include_context :interface
 
   context "an instance of a page interface definition" do
+    it "provides a url_attribute for a url_is value" do
+      expect(page).to respond_to :url_attribute
+      expect(page.url_attribute).to eq("http://localhost:9292")
+    end
+
     it "allows navigation to a page based on explicit url" do
       expect(watir_browser).to receive(:goto).exactly(5).times
       page.perform('http://localhost:9292')
@@ -30,6 +35,28 @@ RSpec.describe Testable::Pages do
       expect(page.current_url).to eq("http://localhost:9292")
       expect(page.page_url).to eq("http://localhost:9292")
       expect(page.url).to eq("http://localhost:9292")
+    end
+
+    it "provides a url_match_attribute for a url_matches value" do
+      expect(page).to respond_to :url_match_attribute
+      expect(page.url_match_attribute).to eq(/:\d{4}/)
+    end
+
+    it "verifies a url if the url_matches assertion has been set" do
+      expect(watir_browser).to receive(:url).twice.and_return("http://localhost:9292")
+      expect { page.has_correct_url? }.not_to raise_error
+      expect(page.has_correct_url?).to be_truthy
+    end
+
+    it "does not verify a url if the url does not match the url_matches assertion" do
+      expect(watir_browser).to receive(:url).and_return("http://127.0.0.1")
+      expect(page.has_correct_url?).to be_falsey
+    end
+
+    it "checks if a page is displayed" do
+      expect(watir_browser).to receive(:url).twice.and_return("http://localhost:9292")
+      page.displayed?
+      page.loaded?
     end
 
     it "provides a title_attribute for a title_is value" do
