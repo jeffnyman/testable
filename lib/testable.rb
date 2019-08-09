@@ -5,6 +5,7 @@ require "testable/element"
 require "testable/locator"
 require "testable/attribute"
 
+require "testable/extensions/data_setter"
 require "testable/extensions/dom_observer"
 
 require "watir"
@@ -17,6 +18,7 @@ module Testable
     caller.extend Testable::Pages::Element
     caller.__send__ :include, Testable::Pages
     caller.__send__ :include, Testable::Element::Locator
+    caller.__send__ :include, Testable::DataSetter
   end
 
   def initialize(browser = nil)
