@@ -1,5 +1,6 @@
 require "testable/version"
 require "testable/page"
+require "testable/context"
 require "testable/element"
 require "testable/locator"
 require "testable/attribute"

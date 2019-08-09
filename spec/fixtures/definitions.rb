@@ -23,3 +23,10 @@ end
 class EmptyPage
   include Testable
 end
+
+class TestFactory
+  include Testable::Context
+
+  attr_accessor :browser
+  attr_accessor :active
+end
