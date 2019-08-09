@@ -94,5 +94,19 @@ RSpec.describe Testable::Pages do
       expect(watir_browser).to receive(:url).and_return("htts://localhost:9292")
       expect(page.secure?).to be_falsy
     end
+
+    it "allows access to the markup of a page" do
+      expect(watir_browser).to receive(:html).exactly(3).times.and_return("<h1>Page Section</h1>")
+      expect(page.markup).to eq("<h1>Page Section</h1>")
+      expect(page.html).to eq("<h1>Page Section</h1>")
+      expect(page.html).to include("<h1>Page")
+    end
+
+    it "allows access to the text of a page" do
+      expect(watir_browser).to receive(:text).exactly(3).times.and_return("some page text")
+      expect(page.page_text).to eq("some page text")
+      expect(page.text).to eq("some page text")
+      expect(page.text).to include("page text")
+    end
   end
 end

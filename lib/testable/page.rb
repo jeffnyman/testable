@@ -90,5 +90,24 @@ module Testable
     def secure?
       !url.match(/^https/).nil?
     end
+
+    # A call to `markup` returns all markup on a page. Generally you don't
+    # just want the entire markup but rather want to parse the output of
+    # the `markup` call.
+    def markup
+      browser.html
+    end
+
+    alias html markup
+
+    # A call to `text` returns all text on a page. Note that this is text
+    # that is taken out of the markup context. It is unlikely you will just
+    # want the entire text but rather want to parse the output of the
+    # `text` call.
+    def text
+      browser.text
+    end
+
+    alias page_text text
   end
 end

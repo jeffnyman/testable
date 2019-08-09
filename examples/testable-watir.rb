@@ -54,6 +54,9 @@ expect(page).to have_correct_title
 expect(page.secure?).to be_truthy
 expect(page).to be_secure
 
+expect(page.html.include?('<article id="index">')).to be_truthy
+expect(page.text.include?("Running a Local Version")).to be_truthy
+
 page.login_form.click
 page.username.set "admin"
 page.password(id: 'password').set "admin"
