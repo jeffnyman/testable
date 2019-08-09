@@ -120,5 +120,34 @@ RSpec.describe Testable::Pages do
       expect(watir_browser).to receive(:execute_script).with("return arguments[0].innerHTML", watir_element).and_return("testing")
       expect(page.execute_script("return arguments[0].innerHTML", watir_element)).to eq("testing")
     end
+
+    it "can return the screen width" do
+      expect(watir_browser).to receive(:execute_script)
+      page.screen_width
+    end
+
+    it "can return the screen height" do
+      expect(watir_browser).to receive(:execute_script)
+      page.screen_height
+    end
+
+    it "allows for calls to maximize the browser window" do
+      expect(watir_browser).to receive(:resize_to).and_return(watir_browser)
+      expect(watir_browser).to receive(:execute_script).twice.and_return(watir_browser)
+      expect(watir_browser).to receive(:window).and_return(watir_browser)
+      page.maximize
+    end
+
+    it "allows for calls to resize the browser window" do
+      expect(watir_browser).to receive(:resize_to).and_return(watir_browser)
+      expect(watir_browser).to receive(:window).and_return(watir_browser)
+      page.resize_to(800, 800)
+    end
+
+    it "allows for calls to move the browser window" do
+      expect(watir_browser).to receive(:move_to).and_return(watir_browser)
+      expect(watir_browser).to receive(:window).and_return(watir_browser)
+      page.move_to(0, 0)
+    end
   end
 end

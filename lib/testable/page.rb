@@ -133,5 +133,39 @@ module Testable
     end
 
     alias execute_script run_script
+
+    # A call to `screen_width` returns the width of the browser screen as
+    # reported by the browser API, using a JavaScript call to the `screen`
+    # object.
+    def screen_width
+      run_script("return screen.width;")
+    end
+
+    # A call to `screen_height` returns the height of the browser screen as
+    # reported by the browser API, using a JavaScript call to the `screen`
+    # object.
+    def screen_height
+      run_script("return screen.height;")
+    end
+
+    # This method provides a means to maximize the browser window. This
+    # is done by getting the screen width and height via JavaScript calls.
+    def maximize
+      browser.window.resize_to(screen_width, screen_height)
+    end
+
+    # This method provides a call to the browser window to resize that
+    # window to the specified width and height values.
+    def resize(width, height)
+      browser.window.resize_to(width, height)
+    end
+
+    # This method provides a call to the browser window to move the
+    # window to the specified x and y screen coordinates.
+    def move_to(x_coord, y_coord)
+      browser.window.move_to(x_coord, y_coord)
+    end
+
+    alias resize_to resize
   end
 end

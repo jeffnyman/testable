@@ -71,4 +71,31 @@ expect(page.browser.alert.text).to eq("Testing")
 page.browser.alert.ok
 expect(page.browser.alert.exists?).to be_falsy
 
+# You have to sometimes go down to Selenium to do certain things with
+# the browser. Here the browser (which is a Watir Browser) that is part
+# of the definition (page) is referencing the driver (which is a Selenium
+# Driver) and is then calling into the `manage` subsystem, which gives
+# access to the window.
+page.browser.driver.manage.window.minimize
+
+# Sleeps are a horrible thing. But they are useful for demonstrations.
+# In this case, the sleep is there just to let you see that the browser
+# did minimize before it gets maximized.
+sleep 2
+
+page.maximize
+
+# Another brief sleep just to show that the maximize did fact work.
+sleep 2
+
+page.resize_to(640, 480)
+
+# A sleep to show that the resize occurs.
+sleep 2
+
+page.move_to(page.screen_width / 2, page.screen_height / 2)
+
+# A sleep to show that the move occurs.
+sleep 2
+
 Testable.quit_browser
