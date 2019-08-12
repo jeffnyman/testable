@@ -14,8 +14,8 @@ module Testable
     #    on_visit(TestPage)
     def on_visit(definition, &block)
       create_active(definition)
-      @active.visit
-      verify_page(@active)
+      @context.visit
+      verify_page(@context)
       call_block(&block)
     end
 
@@ -61,12 +61,12 @@ module Testable
     end
 
     def create_active(definition)
-      @active = definition.new unless @active.is_a?(definition)
+      @context = definition.new unless @context.is_a?(definition)
     end
 
     def call_block(&block)
-      yield @active if block
-      @active
+      yield @context if block
+      @context
     end
   end
 end

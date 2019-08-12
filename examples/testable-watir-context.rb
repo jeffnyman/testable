@@ -50,11 +50,11 @@ end
 Testable.start_browser :firefox
 
 on_visit(Home) do
-  @active.login_form.click
-  @active.username.set "admin"
-  @active.password(id: 'password').set "admin"
-  @active.login.click
-  expect(@active.message.text).to eq('You are now logged in as admin.')
+  @context.login_form.click
+  @context.username.set "admin"
+  @context.password(id: 'password').set "admin"
+  @context.login.click
+  expect(@context.message.text).to eq('You are now logged in as admin.')
 end
 
 on(Navigation) do |page|

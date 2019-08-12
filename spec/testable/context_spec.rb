@@ -26,7 +26,7 @@ RSpec.describe Testable::Context do
 
     it "provides a context reference to be used outside the context" do
       page = @factory.on ValidPage
-      current = @factory.instance_variable_get '@active'
+      current = @factory.instance_variable_get '@context'
       expect(current).to be(page)
     end
 
