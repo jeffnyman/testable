@@ -16,6 +16,18 @@ namespace :script_testable do
   end
 end
 
+namespace :script_capybara do
+  desc "Run the Testable Capybara script"
+  task :capybara do
+    system("ruby ./examples/testable-capybara.rb")
+  end
+
+  desc "Run the Testable Capybara context script"
+  task :context do
+    system("ruby ./examples/testable-capybara-context.rb")
+  end
+end
+
 namespace :script_watir do
   desc "Run the Testable Watir script"
   task :watir do
@@ -25,6 +37,26 @@ namespace :script_watir do
   desc "Run the Testable Watir example test"
   task :test do
     system("ruby ./examples/testable-watir-test.rb")
+  end
+
+  desc "Run the Testable Watir context script"
+  task :context do
+    system("ruby ./examples/testable-watir-context.rb")
+  end
+
+  desc "Run the Testable Watir events script"
+  task :events do
+    system("ruby ./examples/testable-watir-events.rb")
+  end
+
+  desc "Run the Testable Watir ready script"
+  task :ready do
+    system("ruby ./examples/testable-watir-ready.rb")
+  end
+
+  desc "Run the Testable Watir data setter script"
+  task :dataset do
+    system("ruby ./examples/testable-watir-datasetter.rb")
   end
 end
 
