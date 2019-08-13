@@ -75,3 +75,12 @@ Naming/PredicateName:
   NameWhitelist:
     - has_correct_title?
     - has_correct_url?
+
+# Sometimes this seems like a better way to do things.
+Style/DoubleNegation:
+  Enabled: false
+
+# This is entirely for the addition of the match? method to String
+# and that's only needed if you are using an outdated Ruby.
+Style/MultilineIfModifier:
+  Enabled: False

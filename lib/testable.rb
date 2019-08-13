@@ -6,6 +6,7 @@ require "testable/element"
 require "testable/locator"
 require "testable/attribute"
 
+require "testable/extensions/core_ruby"
 require "testable/extensions/data_setter"
 require "testable/extensions/dom_observer"
 
