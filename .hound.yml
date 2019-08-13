@@ -2,6 +2,7 @@ AllCops:
   Exclude:
     - testable.gemspec
     - spec/**/*
+    - examples/**/*
 
 # Removing need for frozen string literal comment.
 Style/FrozenStringLiteralComment:
