@@ -1,14 +1,16 @@
 # Testable
 
+> **Testable /ˈtestəb(ə)l/**
+>
+> _adjective_
+>
+> _able to be tested or tried._
+
+----
+
 Testable is an automated test micro-framework that provides a thin wrapper around [Watir](http://watir.com/) and [Capybara](http://teamcapybara.github.io/capybara/). Testable is based on many ideas from tools like [SitePrism](https://github.com/natritmeyer/site_prism) and [Watirsome](https://github.com/p0deje/watirsome), while also being a logical evolution of my own tool, [Tapestry](https://github.com/jeffnyman/tapestry).
 
-An automated test framework provides a machine-executable abstraction around testing and encodes a set of guiding principles and heuristics for writing tests-as-code.
-
-One of the obstacles to covering the gap between principles of testing and the practice of testing is the mechanics of writing tests. These mechanics are focused on abstractions. A lot of the practice of testing comes down to that: finding the right abstractions. Any automated test framework should be capable of consuming your preferred abstractions because ultimately your automation is simply a tool that supports testing, which means how the framework encourages tests to be expressed should have high fidelty with how human tests would be expressed.
-
-Testable is built, as are all of my test-supporting tools, on the idea that automation should largely be small-footprint, low-fiction, and high-yield.
-
-The code that a test-supporting micro-framework allows should be modular, promoting both high cohesion and low coupling, as well as promoting a single level of abstraction. These concepts together lead to lightweight design as well as support traits that make change affordable. That makes the automation code less expensive to maintain and easier to change. That, ultimately, has a positive impact on the cost of change but, more importantly, allows Testable to be fit within a cost of mistake model, where the goal is to get feedback as quickly as possible regarding when mistakes are made.
+One of the core goals of Testable is to be a mediating influence between higher-level tests (acceptance criteria) and lower-level implementations of those tests. You can see some of the design principles for more details on what guided construction.
 
 ## Installation
 
@@ -34,7 +36,21 @@ You can also install Testable just as you would any other gem:
 
 ## Usage
 
-Instructions coming soon.
+Instructions will be coming soon. However, there are a series of scripts in the `examples` directory and a series of commands in the `Rakefile` that will let you execute those scripts.
+
+## Design Principles
+
+An automated test framework provides a machine-executable abstraction around testing and encodes a set of guiding principles and heuristics for writing tests-as-code.
+
+One of the obstacles to covering the gap between principles of testing and the practice of testing is the mechanics of writing tests. These mechanics are focused on abstractions. A lot of the practice of testing comes down to that: finding the right abstractions.
+
+An automated test framework should be capable of consuming your preferred abstractions because ultimately the automation is simply a tool that supports testing, which means how the framework encourages tests to be expressed should have high fidelity with how human tests would be expressed.
+
+Testable is built around the the idea that automation should largely be small-footprint, low-fiction, and high-yield.
+
+The code that a test-supporting micro-framework allows should be modular, promoting both high cohesion and low coupling, as well as promoting a single level of abstraction. These concepts together lead to lightweight design as well as support traits that make change affordable for tests.
+
+That makes the automation code less expensive to maintain and easier to change. That, ultimately, has a positive impact on the cost of change but, more importantly, allows Testable to be fit within a cost of mistake model, where the goal is to get feedback as quickly as possible regarding when mistakes are made.
 
 ## Development
 
