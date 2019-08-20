@@ -60,8 +60,9 @@ RSpec.describe Testable::Pages do
     end
 
     it "checks if a page is displayed" do
-      expect(watir_browser).to receive(:url).and_return("http://localhost:9292")
+      expect(watir_browser).to receive(:url).twice.and_return("http://localhost:9292")
       page.displayed?
+      page.loaded?
     end
 
     it "provides a title_attribute for a title_is value" do
