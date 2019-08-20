@@ -42,6 +42,18 @@ module Testable
   attr_accessor :browser
 
   class << self
+    # Watir provides a default timeout of 30 seconds. This allows you to change
+    # that in the Testable context. For example:
+    #
+    #   Testable.driver_timeout = 5
+    #
+    # This would equivalent to doing this:
+    #
+    #    Watir.default_timeout = 5
+    def driver_timeout=(value)
+      Watir.default_timeout = value
+    end
+
     # The Testable logger object. To log messages:
     #
     #   Testable.logger.info('Some information.')
