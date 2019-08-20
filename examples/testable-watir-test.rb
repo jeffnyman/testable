@@ -2,9 +2,7 @@
 $LOAD_PATH << "./lib"
 
 require "rspec"
-# rubocop:disable Style/MixinUsage
 include RSpec::Matchers
-# rubocop:enable Style/MixinUsage
 
 require "testable"
 
@@ -45,6 +43,18 @@ class Navigation
 end
 
 Testable.start_browser :firefox
+
+# Will default to UNKNOWN.
+puts Testable.log_level
+
+# Will not actually log.
+Testable.logger.info("Testing an info log message.")
+
+# Change the log.
+Testable.log_level = :debug
+
+# Will actually log.
+Testable.logger.debug("Testing a debug log message.")
 
 page = Home.new
 

@@ -50,6 +50,24 @@ RSpec.configure do |config|
   end
 end
 
+def clear_logger!
+  return unless Testable.instance_variable_get(:@logger)
+  Testable.remove_instance_variable(:@logger)
+end
+
+def capture_stdout
+  original_stdout = $stdout
+  $stdout = StringIO.new
+  yield
+  $stdout.string
+ensure
+  $stdout = original_stdout
+end
+
+def output_lines(string)
+  string.split("\n").length
+end
+
 RSpec.configure do |config|
   # Enable flags like --only-failures and --next-failure
   config.example_status_persistence_file_path = "spec/.rspec_status"

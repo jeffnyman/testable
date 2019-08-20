@@ -1,6 +1,7 @@
 require "testable/version"
 require "testable/page"
 require "testable/ready"
+require "testable/logger"
 require "testable/context"
 require "testable/element"
 require "testable/locator"
@@ -41,6 +42,51 @@ module Testable
   attr_accessor :browser
 
   class << self
+    # The Testable logger object. To log messages:
+    #
+    #   Testable.logger.info('Some information.')
+    #   Testable.logger.debug('Some diagnostics')
+    #
+    # To alter or check the current logging level, you can call `.log_level=`
+    # or `.log_level`. By default the logger will output all messages to the
+    # standard output ($stdout) but it can be altered to log to a file or to
+    # another IO location by calling `.log_path=`.
+    def logger
+      @logger ||= Testable::Logger.new.create
+    end
+
+    # To enable logging, do this:
+    #
+    #   Testable.log_level = :DEBUG
+    #   Testable.log_level = 'DEBUG'
+    #   Testable.log_level = 0
+    #
+    # This can accept any of a Symbol / String / Integer as an input
+    # To disable all logging, which is the case by default, do this:
+    #
+    #   Testable.log_level = :UNKNOWN
+    def log_level=(value)
+      logger.level = value
+    end
+
+    # To query what level is being logged, do this:
+    #
+    #   Testable.log_level
+    #
+    # The logging level will be UNKNOWN by default.
+    def log_level
+      %i[DEBUG INFO WARN ERROR FATAL UNKNOWN][logger.level]
+    end
+
+    # The writer method allows you to configure where you want the output of
+    # the Testable logs to go, with the default being standard output. Here
+    # is how you could change this to a specific file:
+    #
+    #   Testable.log_path = 'testable.log'
+    def log_path=(logdev)
+      logger.reopen(logdev)
+    end
+
     def watir_api
       browser.methods - Object.public_methods -
         Watir::Container.instance_methods

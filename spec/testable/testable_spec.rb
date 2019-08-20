@@ -1,4 +1,6 @@
 RSpec.describe Testable do
+  before { clear_logger! }
+
   it "has a version number" do
     expect(Testable::VERSION).not_to be nil
   end
@@ -18,6 +20,85 @@ RSpec.describe Testable do
     expect(Testable.api.to_s).to include("browser")
     expect(Testable.api.to_s).to include("start_browser")
     expect(Testable.api.to_s).to include("quit_browser")
+  end
+
+  context "logger" do
+    context "at the default severity level" do
+      it "does not log messages below UNKNOWN" do
+        log_messages = capture_stdout do
+          described_class.logger.debug('DEBUG')
+          described_class.logger.fatal('FATAL')
+        end
+
+        expect(log_messages).to be_empty
+      end
+
+      it "logs UNKNOWN level messages" do
+        log_messages = capture_stdout do
+          described_class.logger.unknown('UNKNOWN')
+        end
+
+        expect(output_lines(log_messages)).to eq(1)
+      end
+    end
+
+    context "at a modified severity level" do
+      it "logs messages at all levels above the severity level" do
+        log_messages = capture_stdout do
+          described_class.log_level = :DEBUG
+
+          described_class.logger.debug('DEBUG')
+          described_class.logger.info('INFO')
+        end
+
+        expect(output_lines(log_messages)).to eq(2)
+      end
+    end
+
+    context "log path" do
+      context "setting to a file" do
+        let(:filename) { 'testable.log' }
+        let(:file_content) { File.read(filename) }
+
+        before { described_class.log_path = filename }
+        after { File.delete(filename) if File.exist?(filename) }
+
+        it "sends the log messages to the file path provided" do
+          described_class.logger.unknown('Log to file')
+
+          expect(file_content).to end_with("Log to file\n")
+        end
+      end
+
+      context "setting to standard error" do
+        it "sends the log messages to $stderr" do
+          expect do
+            described_class.log_path = $stderr
+            described_class.logger.unknown('Log to $stderr')
+          end.to output(/Log to \$stderr/).to_stderr
+        end
+      end
+    end
+
+    context "setting log level" do
+      it "can modify the log level" do
+        expect(described_class).to respond_to(:log_level=)
+      end
+    end
+
+    context "reading log level" do
+      subject { described_class.log_level }
+
+      context "default level" do
+        it { is_expected.to eq(:UNKNOWN) }
+      end
+
+      context "after being modified to INFO" do
+        before { described_class.log_level = :INFO }
+
+        it { is_expected.to eq(:INFO) }
+      end
+    end
   end
 
   context "third-party APIs" do
