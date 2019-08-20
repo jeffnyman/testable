@@ -67,7 +67,6 @@ module Testable
     end
 
     alias displayed? has_correct_url?
-    alias loaded?    has_correct_url?
 
     # A call to `title_attribute` returns what the value of the `title_is`
     # attribute is for the given definition. It's important to note that
