@@ -56,6 +56,9 @@ Testable.log_level = :debug
 # Will actually log.
 Testable.logger.debug("Testing a debug log message.")
 
+# Sets the Watir wire protocol level logging.
+Testable.wire_level_logging = :info
+
 page = Home.new
 
 page.visit

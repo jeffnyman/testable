@@ -87,6 +87,37 @@ module Testable
       logger.reopen(logdev)
     end
 
+    # The wire logger provides logging from Watir, which is very similar to the
+    # logging provided by Selenium::WebDriver::Logger. The default level is set
+    # to warn. This means you will see any deprecation notices as well as any
+    # warning messages. To see details on each element interaction the level
+    # can be set to info. To see details on what Watir is doing when it takes a
+    # selector hash and converts it into XPath, the level can be set to debug.
+    # If you want to ignore specific warnings that are appearing during test
+    # execution:
+    #
+    # Watir.logger.ignore :warning_name
+    #
+    # If you want to ignore all deprecation warnings in your tests:
+    #
+    # Watir.logger.ignore :deprecations
+    #
+    # To have the wire logger generate output to a file:
+    #
+    # Watir.logger.output = "wire.log"
+
+    def wire_path=(logdev)
+      Watir.logger.reopen(logdev)
+    end
+
+    def wire_level_logging=(value)
+      Watir.logger.level = value
+    end
+
+    def wire_level_logging
+      %i[DEBUG INFO WARN ERROR FATAL UNKNOWN][Watir.logger.level]
+    end
+
     def watir_api
       browser.methods - Object.public_methods -
         Watir::Container.instance_methods
