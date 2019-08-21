@@ -6,6 +6,7 @@ require "testable/context"
 require "testable/element"
 require "testable/locator"
 require "testable/attribute"
+require "testable/deprecator"
 
 require "testable/capybara/page"
 
