@@ -42,6 +42,18 @@ module Testable
   attr_accessor :browser
 
   class << self
+    # Provides a means to allow a configure block on Testable. This allows you
+    # to setup Testable, as such:
+    #
+    #  Testable.configure do |config|
+    #    config.driver_timeout = 5
+    #    config.wire_level_logging = :info
+    #    config.log_level = :debug
+    #  end
+    def configure
+      yield self
+    end
+
     # Watir provides a default timeout of 30 seconds. This allows you to change
     # that in the Testable context. For example:
     #

@@ -22,6 +22,28 @@ RSpec.describe Testable do
     expect(Testable.api.to_s).to include("quit_browser")
   end
 
+  context "configure" do
+    it "will configure the logger in a configure block" do
+      expect(described_class).to receive(:configure).once
+
+      described_class.configure { |_| :test }
+    end
+
+    it "yields the configured options" do
+      expect(described_class).to receive(:driver_timeout)
+      expect(described_class).to receive(:log_level)
+      expect(described_class).to receive(:log_level=)
+      expect(described_class).to receive(:wire_level_logging)
+
+      described_class.configure do |config|
+        config.driver_timeout
+        config.log_level
+        config.log_level = :WARN
+        config.wire_level_logging
+      end
+    end
+  end
+
   context "logger" do
     context "at the default severity level" do
       it "does not log messages below UNKNOWN" do
