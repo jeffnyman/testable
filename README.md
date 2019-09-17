@@ -42,7 +42,17 @@ You can also install Testable just as you would any other gem:
 
 ## Usage
 
-Instructions will be coming soon. However, there are a series of scripts in the `examples` directory and a series of commands in the `Rakefile` that will let you execute those scripts.
+Probably the best way to get a feel for the current state of the code is to look at the examples:
+
+* [Testable Info](https://github.com/jeffnyman/testable/blob/master/examples/testable-info.rb)
+* [Testable Basics](https://github.com/jeffnyman/testable/blob/master/examples/testable-watir.rb)
+* [Testable Watir](https://github.com/jeffnyman/testable/blob/master/examples/testable-watir-test.rb)
+* [Testable Context](https://github.com/jeffnyman/testable/blob/master/examples/testable-watir-context.rb)
+* [Ready script](https://github.com/jeffnyman/testable/blob/master/examples/testable-watir-ready.rb)
+* [Events script](https://github.com/jeffnyman/testable/blob/master/examples/testable-watir-events.rb)
+* [Data setter script](https://github.com/jeffnyman/testable/blob/master/examples/testable-watir-datasetter.rb)
+
+You'll see references to "Veilus" and a "localhost" in the script. I'm using my own [Veilus application](https://veilus.herokuapp.com/). As far as the localhost, you can use the [Veilus repo](https://github.com/jeffnyman/veilus) to get a local copy to play around with.
 
 ## Design Principles
 
