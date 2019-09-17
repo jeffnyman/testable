@@ -8,7 +8,7 @@
 
 ----
 
-![Gem Version](https://badge.fury.io/rb/testable.svg)](http://badge.fury.io/rb/testable)
+[![Gem Version](https://badge.fury.io/rb/testable.svg)](http://badge.fury.io/rb/testable)
 [![License](http://img.shields.io/badge/license-MIT-blue.svg)](https://github.com/jeffnyman/testable/blob/master/LICENSE.md)
 
 [![Yard Docs](http://img.shields.io/badge/yard-docs-blue.svg)](http://rubydoc.info/github/jeffnyman/testable/master/frames)
