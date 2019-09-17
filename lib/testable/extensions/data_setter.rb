@@ -59,7 +59,7 @@ module Testable
     # Here "warp factor" would be converted to "warp_factor".
     def using(data)
       data.each do |key, value|
-        use_data_with(key, value) if object_enabled_for(key)
+        use_data_with(key, value.to_s) if object_enabled_for(key)
       end
     end
 
@@ -78,10 +78,41 @@ module Testable
     # with. These aspects are what tie this particular implementation to
     # Watir.
     def use_data_with(key, value)
+      value = preprocess_value(value, key)
+
       element = send(key.to_s.tr(' ', '_'))
       set_and_select(key, element, value)
       check_and_uncheck(key, element, value)
+      click(key, element)
     end
+
+    # rubocop:disable Metrics/AbcSize
+    # rubocop:disable Metrics/MethodLength
+    def preprocess_value(value, key)
+      return value unless value =~ /\(\(.*\)\)/
+
+      starter = value.index("((")
+      ender = value.index("))")
+      qualifier = value[starter + 2, ender - starter - 2]
+
+      if qualifier == "random_large"
+        value[starter..ender + 1] = rand(1_000_000_000_000).to_s
+      elsif qualifier == "random_ssn"
+        value = rand(9**9).to_s.rjust(9, '0')
+        value.insert 5, "-"
+        value.insert 3, "-"
+      elsif qualifier == "random_selection"
+        list = chain("#{key}.options.to_a")
+
+        selected = list.sample.text
+        selected = list.sample.text if selected.nil?
+        value = selected
+      end
+
+      value
+    end
+    # rubocop:enable Metrics/AbcSize
+    # rubocop:enable Metrics/MethodLength
 
     def set_and_select(key, element, value)
       key = key.to_s.tr(' ', '_')
@@ -95,6 +126,10 @@ module Testable
       return chain("#{key}.check") if element.class == Watir::CheckBox && value
 
       chain("#{key}.uncheck")      if element.class == Watir::CheckBox
+    end
+
+    def click(key, element)
+      chain("#{key}.click")        if element.class == Watir::Label
     end
 
     # This is a sanity check method to make sure that whatever element is
