@@ -16,7 +16,6 @@ require "testable/extensions/dom_observer"
 
 require "watir"
 require "capybara"
-require "webdrivers"
 
 module Testable
   def self.included(caller)
