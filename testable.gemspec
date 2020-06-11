@@ -37,7 +37,6 @@ Gem::Specification.new do |spec|
 
   spec.add_runtime_dependency "watir", ["~> 6.16"]
   spec.add_runtime_dependency "capybara", [">= 2", "< 4"]
-  spec.add_runtime_dependency "webdrivers", ["~> 4.0"]
 
   spec.post_install_message = %{
 (::) (::) (::) (::) (::) (::) (::) (::) (::) (::) (::) (::)

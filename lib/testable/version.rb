@@ -1,7 +1,7 @@
 module Testable
   module_function
 
-  VERSION = "0.8.0".freeze
+  VERSION = "0.9.0".freeze
 
   def version
     """
