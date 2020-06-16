@@ -14,7 +14,7 @@
 [![Yard Docs](http://img.shields.io/badge/yard-docs-blue.svg)](http://rubydoc.info/github/jeffnyman/testable/master/frames)
 [![Inline docs](http://inch-ci.org/github/jeffnyman/testable.png)](http://inch-ci.org/github/jeffnyman/github)
 
-Testable is an automated test micro-framework that provides a thin wrapper around [Watir](http://watir.com/) and [Capybara](http://teamcapybara.github.io/capybara/). Testable is based on many ideas from tools like [SitePrism](https://github.com/natritmeyer/site_prism) and [Watirsome](https://github.com/p0deje/watirsome), while also being a logical evolution of my own tool, [Tapestry](https://github.com/jeffnyman/tapestry).
+Testable is an automated test micro-framework that provides a thin wrapper around [Watir](http://watir.com/). Testable is based on many ideas from tools like [SitePrism](https://github.com/natritmeyer/site_prism) and [Watirsome](https://github.com/p0deje/watirsome), while also being a logical evolution of my own tool, [Tapestry](https://github.com/jeffnyman/tapestry).
 
 One of the core goals of Testable is to be a mediating influence between higher-level tests (acceptance criteria) and lower-level implementations of those tests. You can see some of the design principles for more details on what guided construction.
 
