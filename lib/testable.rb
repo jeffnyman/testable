@@ -133,14 +133,17 @@ module Testable
     #
     # Watir.logger.output = "wire.log"
 
+    # Path for the logger to use.
     def wire_path=(logdev)
       Watir.logger.reopen(logdev)
     end
 
+    # Level of logging.
     def wire_level_logging=(value)
       Watir.logger.level = value
     end
 
+    # Report the current logging level.
     def wire_level_logging
       %i[DEBUG INFO WARN ERROR FATAL UNKNOWN][Watir.logger.level]
     end

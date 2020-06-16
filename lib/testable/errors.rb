@@ -1,3 +1,4 @@
+# rubocop:disable Style/DocumentationMethod
 module Testable
   module Errors
     NoUrlForDefinition = Class.new(StandardError)
@@ -19,3 +20,4 @@ module Testable
     end
   end
 end
+# rubocop:enable Style/DocumentationMethod

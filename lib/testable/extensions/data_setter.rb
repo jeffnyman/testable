@@ -107,6 +107,8 @@ module Testable
         selected = list.sample.text
         selected = list.sample.text if selected.nil?
         value = selected
+      else # rubocop:disable Style/EmptyElse
+        # Silent pass through.
       end
 
       value
