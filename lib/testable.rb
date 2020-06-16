@@ -13,7 +13,6 @@ require "testable/extensions/data_setter"
 require "testable/extensions/dom_observer"
 
 require "watir"
-require "capybara"
 
 module Testable
   # This is the core method of Testable which makes the various components

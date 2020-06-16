@@ -8,12 +8,10 @@ RSpec.describe Testable do
   it "returns version information" do
     expect(Testable.version).to include("Testable v#{Testable::VERSION}")
     expect(Testable.version).to include("watir")
-    expect(Testable.version).to include("capybara")
   end
 
   it "returns dependency information" do
     expect(Testable.dependencies.to_s).to include("watir")
-    expect(Testable.dependencies.to_s).to include("capybara")
   end
 
   it "returns its own API information" do

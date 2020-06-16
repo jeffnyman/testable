@@ -10,7 +10,6 @@ module Testable
 Testable v#{Testable::VERSION}
 watir: #{gem_version('watir')}
 selenium-webdriver: #{gem_version('selenium-webdriver')}
-capybara: #{gem_version('capybara')}
     """
   end
 
