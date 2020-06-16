@@ -5,6 +5,10 @@ AllCops:
     - spec/**/*
     - examples/**/*
 
+# For now, it is permissible to disable and enable Rubocop checks.
+Style/DisableCopsWithinSourceCodeDirective:
+  Enabled: false
+
 # Do not require parentheses with methods that take arguments.
 Style/MethodCallWithArgsParentheses:
   Enabled: false

@@ -6,14 +6,21 @@ module Testable
   NATIVE_QUALIFIERS = %i[visible].freeze
   private_constant :NATIVE_QUALIFIERS
 
+  # This predicate method returns all of the elements that can be recognized
+  # by Watir.
   def elements?
     @elements
   end
 
+  # This predicate method checks if a given element is in the list of known
+  # elements that Watir knows how to interact with.
   def recognizes?(method)
     @elements.include? method.to_sym
   end
 
+  # Provides a list of all elements that Watir knows how to work with. This
+  # is generated from the Watir container itself so the list should always
+  # be up to date.
   def elements
     @elements ||= Watir::Container.instance_methods unless @elements
   end

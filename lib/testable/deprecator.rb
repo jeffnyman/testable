@@ -1,6 +1,8 @@
 module Testable
   class Deprecator
     class << self
+      # This is used to indicate that certain functionality within Testable
+      # has been deprecated and the previous functionality will disappear.
       def deprecate(current, upcoming = nil, known_version = nil)
         if upcoming
           warn(
@@ -16,6 +18,10 @@ module Testable
         ) if known_version
       end
 
+      # This is used to indicate that certain functionality within Testable
+      # has been soft deprecated, meaning that some aspect of how the
+      # framework is configured has changed and that change will become
+      # the new default behavior in a given version.
       def soft_deprecate(current, reason, known_version, upcoming = nil)
         debug("The #{current} method is changing and is now configurable.")
         debug("REASON: #{reason}.")

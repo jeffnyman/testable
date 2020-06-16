@@ -16,6 +16,8 @@ require "watir"
 require "capybara"
 
 module Testable
+  # This is the core method of Testable which makes the various components
+  # of the framework available to tests.
   def self.included(caller)
     caller.extend Testable::Pages::Attribute
     caller.extend Testable::Pages::Element
@@ -25,6 +27,9 @@ module Testable
     caller.__send__ :include, Testable::DataSetter
   end
 
+  # Initialization is used to establish a browser instance within the
+  # context of the framework. The logic here requires determining under
+  # what condition a browser instance may have been set.
   def initialize(browser = nil, &block)
     @browser = Testable.browser unless Testable.browser.nil?
     @browser = browser if Testable.browser.nil?
@@ -140,11 +145,14 @@ module Testable
       %i[DEBUG INFO WARN ERROR FATAL UNKNOWN][Watir.logger.level]
     end
 
+    # Returns information about the API that Watir exposes. This does not
+    # include Selenium elements, which Watir is wrapping.
     def watir_api
       browser.methods - Object.public_methods -
         Watir::Container.instance_methods
     end
 
+    # Returns information about the API that is specific to Selenium.
     def selenium_api
       browser.driver.methods - Object.public_methods
     end
@@ -154,6 +162,9 @@ module Testable
     # access to the browser.
     attr_accessor :browser
 
+    # This sets the browser instance so that Testable is aware of what that
+    # instance is. This is how a test, using the Testable framework, will
+    # be able to know which browser to communicate with.
     def set_browser(app = :chrome, *args)
       @browser = Watir::Browser.new(app, *args)
       Testable.browser = @browser
@@ -161,10 +172,15 @@ module Testable
 
     alias start_browser set_browser
 
+    # Generates a quit event on the browser instance. This is passed through
+    # to Watir which will ultimately delegate browser handling to Selenium
+    # and thus WebDriver.
     def quit_browser
       @browser.quit
     end
 
+    # This provides the API that is defined by Testable when you have a
+    # working model, such as a page object.
     def api
       methods - Object.public_methods
     end

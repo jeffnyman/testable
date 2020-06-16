@@ -1,3 +1,5 @@
+# rubocop:disable Style/DocumentationMethod
+
 class String
   # This is only required if using a version of Ruby before 2.4. A match?
   # method for String was added in version 2.4.
@@ -11,3 +13,5 @@ class FalseClass
     false
   end
 end
+
+# rubocop:enable Style/DocumentationMethod
