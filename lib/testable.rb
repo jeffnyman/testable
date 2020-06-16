@@ -8,8 +8,6 @@ require "testable/locator"
 require "testable/attribute"
 require "testable/deprecator"
 
-require "testable/capybara/page"
-
 require "testable/extensions/core_ruby"
 require "testable/extensions/data_setter"
 require "testable/extensions/dom_observer"

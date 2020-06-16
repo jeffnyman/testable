@@ -30,11 +30,11 @@ Style/SignalException:
   Enabled: false
 
 # This never works for validations.
-Layout/AlignHash:
+Layout/HashAlignment:
   EnforcedLastArgumentHashStyle: ignore_implicit
 
 # Align multi-line params with previous line.
-Layout/AlignParameters:
+Layout/ParameterAlignment:
   EnforcedStyle: with_fixed_indentation
 
 # Indent `when` clause one step from `case`.
@@ -73,7 +73,7 @@ Lint/ScriptPermission:
 
 # Allow methods with has_ for predicates.
 Naming/PredicateName:
-  NameWhitelist:
+  AllowedMethods:
     - has_correct_title?
     - has_correct_url?
 
