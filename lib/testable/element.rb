@@ -4,6 +4,7 @@ module Testable
   module_function
 
   NATIVE_QUALIFIERS = %i[visible].freeze
+  private_constant :NATIVE_QUALIFIERS
 
   def elements?
     @elements

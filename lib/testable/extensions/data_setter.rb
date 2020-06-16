@@ -20,9 +20,9 @@ class Object
 
     method_chain.split('.').inject(self) do |o, m|
       if data.nil?
-        o.send(m.intern)
+        o.public_send(m.to_sym)
       else
-        o.send(m.intern, data)
+        o.public_send(m.to_sym, data)
       end
     end
   end
@@ -80,7 +80,7 @@ module Testable
     def use_data_with(key, value)
       value = preprocess_value(value, key)
 
-      element = send(key.to_s.tr(' ', '_'))
+      element = public_send(key.to_s.tr(' ', '_'))
       set_and_select(key, element, value)
       check_and_uncheck(key, element, value)
       click(key, element)
@@ -137,7 +137,7 @@ module Testable
     # visible (meaning, display is not 'none'), and is capable of accepting
     # input, thus being enabled.
     def object_enabled_for(key)
-      web_element = send(key.to_s.tr(' ', '_'))
+      web_element = public_send(key.to_s.tr(' ', '_'))
       web_element.enabled? && web_element.present?
     end
   end

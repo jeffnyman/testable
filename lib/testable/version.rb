@@ -2,6 +2,7 @@ module Testable
   module_function
 
   VERSION = "0.10.0".freeze
+  public_constant :VERSION
 
   def version
     """

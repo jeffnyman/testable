@@ -1,8 +1,17 @@
 AllCops:
+  EnabledByDefault: true
   Exclude:
     - testable.gemspec
     - spec/**/*
     - examples/**/*
+
+# Do not require parentheses with methods that take arguments.
+Style/MethodCallWithArgsParentheses:
+  Enabled: false
+
+# Do not enforce copyright messaging.
+Style/Copyright:
+  Enabled: false
 
 # Removing need for frozen string literal comment.
 Style/FrozenStringLiteralComment:
@@ -67,6 +76,10 @@ Metrics/ParameterLists:
 
 # Remove execute permissions check.
 Lint/ScriptPermission:
+  Enabled: false
+
+# Do not require gem descriptions
+Bundler/GemComment:
   Enabled: false
 
 # Testable Exceptions

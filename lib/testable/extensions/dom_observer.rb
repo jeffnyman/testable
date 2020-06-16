@@ -2,6 +2,8 @@ module Watir
   class Element
     OBSERVER_FILE = "/dom_observer.js".freeze
     DOM_OBSERVER = File.read("#{File.dirname(__FILE__)}#{OBSERVER_FILE}").freeze
+    private_constant :OBSERVER_FILE
+    private_constant :DOM_OBSERVER
 
     # This method makes a call to `execute_async_script` which means that the
     # DOM observer script must explicitly signal that it is finished by
