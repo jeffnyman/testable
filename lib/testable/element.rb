@@ -223,14 +223,17 @@ module Testable
       # like this: ["Drag and Drop"].
       def define_element_accessor(identifier, *signature, element, &block)
         locators, qualifiers = accessor_aspects(element, signature)
-        define_method(identifier.to_s) do |*values|
-          if block_given?
-            instance_exec(*values, &block)
-          else
-            locators = values[0] if locators.empty?
-            access_element(element, locators, qualifiers)
+
+        include(Module.new do
+          define_method(identifier.to_s) do |*values|
+            if block_given?
+              instance_exec(*values, &block)
+            else
+              locators = values[0] if locators.empty?
+              access_element(element, locators, qualifiers)
+            end
           end
-        end
+        end)
       end
     end
   end

@@ -84,7 +84,6 @@ module Testable
           # just be the first item of the elements found.
           plural ? elements : elements.first
         end
-        #=============================================================
       rescue Watir::Exception::UnknownObjectException
         return false if caller_locations.any? do |str|
           str.to_s.match?("ready_validations_pass?")
