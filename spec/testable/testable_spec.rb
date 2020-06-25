@@ -20,6 +20,26 @@ RSpec.describe Testable do
     expect(Testable.api.to_s).to include("quit_browser")
   end
 
+  it "recognizes methods that are pluralized forms of Watir methods" do
+    expect(Testable.plural?(:divs)).to eq true
+    expect(Testable.plural?(:spans)).to eq true
+  end
+
+  it "recognizes methods that are not pluralized forms of Watir methods" do
+    expect(Testable.plural?(:div)).to eq false
+    expect(Testable.plural?(:class)).to eq false
+    expect(Testable.plural?(:classes)).to eq false
+  end
+
+  it "attempts to pluralize Watir methods" do
+    expect(Testable.pluralize(:div)).to eq :divs
+    expect(Testable.pluralize(:checkbox)).to eq :checkboxes
+  end
+
+  it "recognizes invalid attempts to pluralize Watir methods" do
+    expect { Testable.pluralize(:class) }.to raise_error(Testable::Errors::PluralizedElementError)
+  end
+
   context "configure" do
     it "will configure the logger in a configure block" do
       expect(described_class).to receive(:configure).once

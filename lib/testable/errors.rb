@@ -6,12 +6,14 @@ module Testable
     NoUrlMatchPossible = Class.new(StandardError)
     NoTitleForDefinition = Class.new(StandardError)
     PageNotValidatedError = Class.new(StandardError)
+    PluralizedElementError = Class.new(StandardError)
 
     public_constant :NoUrlForDefinition
     public_constant :NoUrlMatchForDefinition
     public_constant :NoUrlMatchPossible
     public_constant :NoTitleForDefinition
     public_constant :PageNotValidatedError
+    public_constant :PluralizedElementError
 
     class PageURLFromFactoryNotVerified < StandardError
       def message

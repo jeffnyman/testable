@@ -25,6 +25,48 @@ module Testable
     @elements ||= Watir::Container.instance_methods unless @elements
   end
 
+  # This predicate method checks if a given element is a valid element that
+  # Watir knows how to interact with, but in plural form.
+  #
+  # @example
+  #   Testable.recognizes?(:spans) # => true
+  #   Testable.recognizes?(:divs) # => true
+  #   Testable.recognizes?(:class) # => false
+  #   Testable.recognizes?(:classes) # => false
+  def plural?(method)
+    value = method.to_s
+    plural = value.to_sym
+
+    # Remove the trailing "s" or "es" to de-pluralize.
+    single = value.sub(/e?s$/, '').to_sym
+
+    !value.match(/s$/).nil? &&
+      @elements.include?(plural) &&
+      @elements.include?(single)
+  end
+
+  # This method will allow a particular element name to be pluralized.
+  #
+  # @example
+  #   Empirical.pluralize(:div) => divs
+  #   Empirical.pluralize(:checkbox) => checkboxes
+  def self.pluralize(method)
+    value = method.to_s
+
+    # This bit is not what you would call optimized. Essentially, it just
+    # tries to ppluralize with "s" and see if that method is included in the
+    # Watir methods. If that fails, then an attempt to pluralize with "es" is
+    # tried. If that fails, the assumption is made that a pluralized form of
+    # the Watir method does not exist.
+    if @elements.include?(:"#{value}s")
+      :"#{value}s"
+    elsif @elements.include?(:"#{value}es")
+      :"#{value}es"
+    else
+      raise Testable::Errors::PluralizedElementError, "Unable to find plural form for #{value}!"
+    end
+  end
+
   module Pages
     module Element
       # This iterator goes through the Watir container methods and
