@@ -7,6 +7,8 @@ module Testable
     NoTitleForDefinition = Class.new(StandardError)
     PageNotValidatedError = Class.new(StandardError)
     PluralizedElementError = Class.new(StandardError)
+    RegionNamespaceError = Class.new(StandardError)
+    RegionFinderError = Class.new(StandardError)
 
     public_constant :NoUrlForDefinition
     public_constant :NoUrlMatchForDefinition
@@ -14,6 +16,8 @@ module Testable
     public_constant :NoTitleForDefinition
     public_constant :PageNotValidatedError
     public_constant :PluralizedElementError
+    public_constant :RegionNamespaceError
+    public_constant :RegionFinderError
 
     class PageURLFromFactoryNotVerified < StandardError
       def message

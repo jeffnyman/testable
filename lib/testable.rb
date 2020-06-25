@@ -1,6 +1,7 @@
 require "testable/version"
 require "testable/page"
 require "testable/ready"
+require "testable/region"
 require "testable/logger"
 require "testable/context"
 require "testable/element"
@@ -20,6 +21,7 @@ module Testable
   def self.included(caller)
     caller.extend Testable::Pages::Attribute
     caller.extend Testable::Pages::Element
+    caller.extend Testable::Pages::Region
     caller.__send__ :include, Testable::Ready
     caller.__send__ :include, Testable::Pages
     caller.__send__ :include, Testable::Element::Locator
@@ -29,9 +31,11 @@ module Testable
   # Initialization is used to establish a browser instance within the
   # context of the framework. The logic here requires determining under
   # what condition a browser instance may have been set.
-  def initialize(browser = nil, &block)
+  def initialize(browser = nil, region_element = nil, parent = nil, &block)
     @browser = Testable.browser unless Testable.browser.nil?
     @browser = browser if Testable.browser.nil?
+    @region_element = region_element || Testable.browser
+    @parent = parent
     begin_with if respond_to?(:begin_with)
     instance_eval(&block) if block
   end
@@ -42,6 +46,10 @@ module Testable
   # valid browser instance. This is an instance-level access to whatever
   # browser Testable is using.
   attr_accessor :browser
+
+  # This accessor is needed so that the region_element is recognized as
+  # part of the overall execution context of Testable.
+  attr_reader :region_element
 
   class << self
     # Provides a means to allow a configure block on Testable. This allows you

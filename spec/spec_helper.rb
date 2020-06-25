@@ -12,7 +12,7 @@ SimpleCov.formatter = SimpleCov::Formatter::MultiFormatter.new([
 SimpleCov.start do
   add_filter "spec/"
   coverage_dir "spec/coverage"
-  minimum_coverage 80
+  minimum_coverage 75
   maximum_coverage_drop 5
 end
 

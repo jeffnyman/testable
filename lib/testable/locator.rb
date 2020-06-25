@@ -45,12 +45,17 @@ module Testable
       # validation. That's necessary because a ready validation has to find
       # an element in order to determine the ready state, but that element
       # might not be present.
+
+      # rubocop:disable Metrics/AbcSize
+      # rubocop:disable Metrics/CyclomaticComplexity
+      # rubocop:disable Metrics/PerceivedComplexity
+      # rubocop:disable Metrics/MethodLength
       def access_element(element, locators, qualifiers)
         if qualifiers.empty?
           if element == "element".to_sym
             @browser.element(locators).to_subtype
           else
-            @browser.__send__(element, locators)
+            region_element.__send__(element, locators)
           end
         else
           # If the qualifiers are not empty, then that means the framework
@@ -59,7 +64,7 @@ module Testable
           plural = Testable.plural?(element)
           element = Testable.pluralize(element) unless plural
 
-          elements = @browser.__send__(element, locators)
+          elements = region_element.__send__(element, locators)
 
           # Consider the following element definition:
           #
@@ -91,6 +96,10 @@ module Testable
 
         raise
       end
+      # rubocop:enable Metrics/AbcSize
+      # rubocop:enable Metrics/CyclomaticComplexity
+      # rubocop:enable Metrics/PerceivedComplexity
+      # rubocop:enable Metrics/MethodLength
     end
   end
 end
