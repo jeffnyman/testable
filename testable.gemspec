@@ -8,7 +8,7 @@ Gem::Specification.new do |spec|
   spec.authors       = ["Jeff Nyman"]
   spec.email         = ["jeffnyman@gmail.com"]
 
-  spec.summary       = %q{Web and API Automation, using Capybara and Watir}
+  spec.summary       = %q{Web and API Automation, using Watir}
   spec.description   = %q{Provides a semantic DSL to construct fluent interfaces for test execution logic.}
   spec.homepage      = "https://github.com/jeffnyman/testable"
   spec.license       = "MIT"
