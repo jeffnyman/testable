@@ -36,8 +36,42 @@ module Testable
     @browser = browser if Testable.browser.nil?
     @region_element = region_element || Testable.browser
     @parent = parent
-    begin_with if respond_to?(:begin_with)
+    definition_setup
     instance_eval(&block) if block
+  end
+
+  # This method is used to setup any definitions provided as part of the
+  # executable of Testable. This generally means any page definitions that
+  # include Testable.
+  def definition_setup
+    begin_with if respond_to?(:begin_with)
+    initialize_page if respond_to?(:initialize_page)
+    initialize_region if respond_to?(:initialize_region)
+    initialize_regions
+  end
+
+  # This method is used to interate through any definitions that provide
+  # an "initialize_region" method. What happens here is essentially that
+  # new polymorphic modules are created based on classes. This is what
+  # allows a region to be part of a page definition, the latter of which
+  # is nothing more than a standard Ruby class.
+  def initialize_regions
+    @initialized_regions ||= []
+
+    # The goal here is get all included and extended modules.
+    modules = self.class.included_modules + (class << self; self end).included_modules
+    modules.uniq!
+
+    # Then each of those modules can be initialized.
+    modules.each do |m|
+      # First a check is made the that constructor is defined and that it has
+      # not been called before.
+      next if @initialized_regions.include?(m) || !m.instance_methods.include?(:initialize_region)
+
+      m.instance_method(:initialize_region).bind(self).call
+
+      @initialized_regions << m
+    end
   end
 
   # This accessor is needed so that internal API calls, like `markup` or
@@ -50,6 +84,10 @@ module Testable
   # This accessor is needed so that the region_element is recognized as
   # part of the overall execution context of Testable.
   attr_reader :region_element
+
+  # This accessor is needed so that the parent of a region is recognized as
+  # part of the overall execution context of Testable.
+  attr_reader :parent
 
   class << self
     # Provides a means to allow a configure block on Testable. This allows you
