@@ -1,20 +1,5 @@
-require "coveralls"
-Coveralls.wear!
-
 require "bundler/setup"
 require "testable"
-
-SimpleCov.formatter = SimpleCov::Formatter::MultiFormatter.new([
-  Coveralls::SimpleCov::Formatter,
-  SimpleCov::Formatter::HTMLFormatter,
-])
-
-SimpleCov.start do
-  add_filter "spec/"
-  coverage_dir "spec/coverage"
-  minimum_coverage 75
-  maximum_coverage_drop 5
-end
 
 Dir['spec/fixtures/**/*.rb'].each do |file|
   require file.sub(/spec\//, '')
