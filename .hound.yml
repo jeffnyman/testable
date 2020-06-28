@@ -82,6 +82,10 @@ Metrics/ParameterLists:
 Lint/ScriptPermission:
   Enabled: false
 
+# Not requiring fully qualified constants.
+Lint/ConstantResolution:
+  Enabled: false
+
 # Do not require gem descriptions
 Bundler/GemComment:
   Enabled: false
