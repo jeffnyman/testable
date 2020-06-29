@@ -60,7 +60,7 @@ An automated test framework provides a machine-executable abstraction around tes
 
 One of the obstacles to covering the gap between principles of testing and the practice of testing is the mechanics of writing tests. These mechanics are focused on abstractions. A lot of the practice of testing comes down to that: finding the right abstractions.
 
-An automated test framework should be capable of consuming your preferred abstractions because ultimately the automation is simply a tool that supports testing, which means how the framework encourages tests to be expressed should have high fidelity with how human tests would be expressed. The execution of tests, whether automated or not, is often secondary to the design of those tests in the first place. Empiric was designed around a couple of truisms:
+An automated test framework should be capable of consuming your preferred abstractions because ultimately the automation is simply a tool that supports testing, which means how the framework encourages tests to be expressed should have high fidelity with how human tests would be expressed. The execution of tests, whether automated or not, is often secondary to the design of those tests in the first place. Testable was designed around a couple of truisms:
 
 * When tests become automation:
   * We risk turning testing into a programming problem.
