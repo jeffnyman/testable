@@ -60,13 +60,36 @@ An automated test framework provides a machine-executable abstraction around tes
 
 One of the obstacles to covering the gap between principles of testing and the practice of testing is the mechanics of writing tests. These mechanics are focused on abstractions. A lot of the practice of testing comes down to that: finding the right abstractions.
 
-An automated test framework should be capable of consuming your preferred abstractions because ultimately the automation is simply a tool that supports testing, which means how the framework encourages tests to be expressed should have high fidelity with how human tests would be expressed.
+An automated test framework should be capable of consuming your preferred abstractions because ultimately the automation is simply a tool that supports testing, which means how the framework encourages tests to be expressed should have high fidelity with how human tests would be expressed. The execution of tests, whether automated or not, is often secondary to the design of those tests in the first place. Empiric was designed around a couple of truisms:
+
+* When tests become automation:
+  * We risk turning testing into a programming problem.
+
+* When tests become automation:
+  * We risk the mechanisms overwhelming the meaning.
+
+This is why Testable is designed as a _micro_-framework rather than a framework.
 
 Testable is built around the the idea that automation should largely be small-footprint, low-fiction, and high-yield.
 
 The code that a test-supporting micro-framework allows should be modular, promoting both high cohesion and low coupling, as well as promoting a single level of abstraction. These concepts together lead to lightweight design as well as support traits that make change affordable for tests.
 
 That makes the automation code less expensive to maintain and easier to change. That, ultimately, has a positive impact on the cost of change but, more importantly, allows Testable to be fit within a cost of mistake model, where the goal is to get feedback as quickly as possible regarding when mistakes are made.
+
+Some of the core principles of Testable's design are the following:
+
+* Embrace small code.
+* Abstraction encourages clarity.
+* No computation is too small to be put into a helper function.
+* No expression is too simple to be given a name.
+* Small code is more easily seen to be obviously correct.
+* Code that's more obviously correct can be more easily composed.
+
+The above also led to some secondary, but no less important, principles of design:
+
+* Be willing to trade elegance of design for practicality of implementation.
+* Embrace brevity, but do not sacrifice readability. Concise, not terse.
+* Prefer elegance over efficiency where efficiency is less than critical.
 
 ## Development
 
