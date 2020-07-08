@@ -44,7 +44,8 @@ module Testable
       # rubocop:disable Metrics/ParameterLists
       # rubocop:disable Metrics/BlockLength
       # rubocop:disable Metrics/BlockNesting
-      def define_region_accessor(identifier, within: nil, each: nil, collection_class: nil, region_class: nil, &block)
+      # def define_region_accessor(identifier, within: nil, each: nil, collection_class: nil, region_class: nil, &block)
+      def define_region_accessor(identifier, within: nil, each: nil, region_class: nil, collection_class: nil, &block)
         include(Module.new do
           define_method(identifier) do
             # The class path is what essentially determines the model to
@@ -159,7 +160,7 @@ module Testable
 
         include(Module.new do
           define_method(finder_method_name) do |**opts|
-            __send__(region_name).find do |entity|
+            __send__(identifier).find do |entity|
               opts.all? do |key, value|
                 entity.__send__(key) == value
               end
