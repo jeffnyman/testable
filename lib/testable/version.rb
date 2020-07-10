@@ -1,7 +1,7 @@
 module Testable
   module_function
 
-  VERSION = "0.10.0".freeze
+  VERSION = "1.0.0".freeze
   public_constant :VERSION
 
   # Returns version information about Testable and its core dependencies.
