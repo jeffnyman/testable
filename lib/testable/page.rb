@@ -9,7 +9,7 @@ module Testable
     # if an element has been provided since all elements automatically
     # become methods on a definition instance.
     def definition_api
-      public_methods(false) - Object.public_methods
+      public_methods - Object.public_methods
     end
 
     # The `visit` method provides navigation to a specific page by passing
